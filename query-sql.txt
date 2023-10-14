@@ -1,0 +1,41 @@
+SET
+    SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET
+    time_zone = "+00:00";
+
+CREATE TABLE country (
+	id INT(4) NOT NULL PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+	);
+
+INSERT INTO country (id, name)
+VALUES (1, 'Argentina'),(2, 'Francia'),(3, 'Paraguay'),(4, 'Uruguay');
+
+CREATE TABLE city (
+	id INT(6) NOT NULL PRIMARY KEY,
+	name VARCHAR(255) NOT NULL
+	);
+
+INSERT INTO city (id, name)
+VALUES (1, 'San Justo'),(2, 'Castelar');
+
+CREATE TABLE user (
+	id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	fullname VARCHAR(30) NOT NULL,
+	birth_date DATE NOT NULL,
+	gender VARCHAR(30) NOT NULL,
+	idCountry INT(4) NOT NULL,
+	idCity INT(6) NOT NULL,
+	profile_picture VARCHAR(30) DEFAULT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	username VARCHAR(30) NOT NULL,
+	password VARCHAR(30) NOT NULL,
+	register_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	is_active BOOLEAN NOT NULL DEFAULT TRUE,
+	FOREIGN KEY(idCountry) REFERENCES country(id),
+	FOREIGN KEY(idCity) REFERENCES city(id)
+	);
+
+INSERT INTO user (fullname,birth_date,gender,idCountry,idCity,profile_picture,email,username,password)
+VALUES ('Pregun Tados','2013-10-26','Femenino',1,1,NULL,'pregunta2@etermax.com','admin','1234');

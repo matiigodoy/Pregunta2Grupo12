@@ -28,7 +28,7 @@ class RegisterService
         if (!$this->validatePassword($pass, $passValidate)) {
             return "Las contraseñas no coinciden. Intentá de nuevo.";
         } else {
-            if (!$this->createAccount($pass, $nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $photo)) {
+            if (!$this->createAccount($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo)) {
                 return "El usuario ya está registrado. Prueba con otro nombre o correo electrónico.";
             } else {
                 return true;
@@ -36,10 +36,10 @@ class RegisterService
         }
     }
 
-    private function createAccount($pass, $nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $photo)
+    private function createAccount($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo)
     {
         {
-            if ($this->model->saveUser($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $photo, $pass)) {
+            if ($this->model->saveUser($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo)) {
                 return true;
             }
         }

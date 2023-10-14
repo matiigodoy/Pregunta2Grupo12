@@ -18,7 +18,7 @@ class RegisterController {
         $this->renderer->render("register", $data);
     }
 
-    public function newAccount()
+    public function newUser()
     {
         if (isset($_POST["nombre"], $_POST["fecha_nacimiento"], $_POST["genero"], $_POST["pais"], $_POST["ciudad"], $_POST["correo"], $_POST["nombre_usuario"], $_POST["contrasenia"], $_POST["confirmar_contrasenia"])) {
             $formData = $_POST;

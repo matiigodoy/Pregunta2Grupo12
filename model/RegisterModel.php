@@ -9,14 +9,14 @@ class RegisterModel
         $this->database = $database;
     }
 
-    public function saveUser($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $photo, $pass)
+    public function saveUser($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo)
     {
         $ret = false;
 
         if ($this->validateUser($mail, $nameUser)) {
-            $query = "INSERT INTO usuario (Nombre_completo, Fecha_nacimiento, Genero, idPais, idCiudad, Mail, Nombre_usuario, Foto_perfil, Pass) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO user (fullname, birth_date, gender, idCountry, idCity, email, username, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->database->prepare($query);
-            $stmt->bind_param("sssiissss", $nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $photo, $pass);
+            $stmt->bind_param("sssiissss", $nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo);
             $stmt->execute();
             if ($stmt->affected_rows > 0) {
                 $ret = true;
@@ -27,7 +27,7 @@ class RegisterModel
 
     public function validateUser($mail, $nameUser)
     {
-        $query = "SELECT COUNT(*) AS count FROM usuario WHERE mail = ? OR nombre_usuario = ?";
+        $query = "SELECT COUNT(*) AS count FROM user WHERE email = ? OR username = ?";
         $stmt = $this->database->prepare($query);
         $stmt->bind_param("ss", $mail, $nameUser);
         $stmt->execute();
