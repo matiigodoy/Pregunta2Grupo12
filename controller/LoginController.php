@@ -17,26 +17,36 @@ class LoginController{
         $this->renderer->render("login", $data);
     }
 
-    public function verify() {
+    public function authenticate() {
         if(isset($_POST["nombre_usuario"], $_POST["contrasenia"])) {
             $formData = $_POST;
 
             $result = $this->loginService->verifyUser($formData);
 
             if($result === true) {
-                //Reemplazar destino
-                header("Location: index.php");
-                exit();
+                //header("Location: index.php");
+                $this->renderLoginSuccess();
             } else {
-                $data["message"] = "Usuario y/o contraseña inválidos. Vuelva a intentar.";
-                $data["showMessage"] = true;
-                $this->renderer->render("login", $data);
+                $this->renderLoginError($result);
             }
         } else {
             $data["message"] = "Faltó completar uno o más campos. Por favor, vuelva a intentar.";
             $data["showMessage"] = true;
             $this->renderer->render("login", $data);
         }
+    }
+
+    private function renderLoginSuccess()
+    {
+        $data = [];
+        $this->renderer->render("loginOK", $data);
+    }
+    private function renderLoginError($message)
+    {
+        $data["message"] = $message;
+        $data['showMessage'] = true;
+        $data['mapa'] = true;
+        $this->renderer->render("login", $data);
     }
 
 }

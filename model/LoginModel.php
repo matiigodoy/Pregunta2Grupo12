@@ -8,7 +8,7 @@ class LoginModel {
     }
 
     public function validateCredentials($username, $password){
-        $query = "SELECT id FROM usuario WHERE nombre_usuario = ? AND pass = ?";
+        $query = "SELECT id FROM user WHERE username = ? AND password = ?";
         $stmt = $this->database->prepare($query);
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
