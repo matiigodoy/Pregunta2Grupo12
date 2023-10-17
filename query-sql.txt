@@ -50,13 +50,13 @@ VALUES (1, 'MVC / POO'),(2, 'Introducción a HTTP y a las Aplicaciones Web');
 
 CREATE TABLE question (
     id INT(6) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    description VARCHAR(80) NOT NULL,
+    description VARCHAR(200) NOT NULL,
     idCategory INT(4) NOT NULL,
     status VARCHAR(10) NOT NULL,
-    option_1 VARCHAR(30),
-    option_2 VARCHAR(30),
-    option_3 VARCHAR(30),
-    option_4 VARCHAR(30),
+    option_1 VARCHAR(200),
+    option_2 VARCHAR(200),
+    option_3 VARCHAR(200),
+    option_4 VARCHAR(200),
     correct_option INT(1) NOT NULL,
     FOREIGN KEY(idCategory) REFERENCES category(id)
     );

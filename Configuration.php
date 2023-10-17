@@ -5,10 +5,13 @@ include_once('helpers/Router.php');
 include_once('helpers/Logger.php');
 
 include_once('controller/RegisterController.php');
+include_once('controller/LoginController.php');
 
 include_once('model/RegisterModel.php');
+include_once('model/LoginModel.php');
 
 include_once('helpers/RegisterService.php');
+include_once('helpers/LoginService.php');
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
@@ -21,6 +24,9 @@ class Configuration {
 
     public function getRegisterController() {
         return new RegisterController( $this->getRegisterModel(), $this->getRegisterService(),$this->getRenderer());
+    }
+    public function getLoginController() {
+        return new LoginController( $this->getLoginModel(), $this->getLoginService(),$this->getRenderer());
     }
 
     private function getArrayConfig() {
@@ -54,5 +60,14 @@ class Configuration {
     public function getRegisterModel()
     {
         return new RegisterModel($this->getDatabase());
+    }
+    public function getLoginService(){
+        return new LoginService(
+            $this->getLoginModel()
+        );
+    }
+    public function getLoginModel()
+    {
+        return new LoginModel($this->getDatabase());
     }
 }
