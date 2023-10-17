@@ -6,12 +6,15 @@ include_once('helpers/Logger.php');
 
 include_once('controller/RegisterController.php');
 include_once('controller/LoginController.php');
+include_once('controller/PartidaController.php');
 
 include_once('model/RegisterModel.php');
 include_once('model/LoginModel.php');
+include_once('model/PartidaModel.php');
 
 include_once('helpers/RegisterService.php');
 include_once('helpers/LoginService.php');
+include_once('helpers/PartidaService.php');
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
 
@@ -27,6 +30,10 @@ class Configuration {
     }
     public function getLoginController() {
         return new LoginController( $this->getLoginModel(), $this->getLoginService(),$this->getRenderer());
+    }
+
+    public function getPartidaController() {
+        return new PartidaController( $this->getPartidaModel(), $this->getPartidaService(),$this->getRenderer());
     }
 
     private function getArrayConfig() {
@@ -69,5 +76,14 @@ class Configuration {
     public function getLoginModel()
     {
         return new LoginModel($this->getDatabase());
+    }
+    public function getPartidaService(){
+        return new PartidaService(
+            $this->getPartidaModel()
+        );
+    }
+    public function getPartidaModel()
+    {
+        return new PartidaModel($this->getDatabase());
     }
 }
