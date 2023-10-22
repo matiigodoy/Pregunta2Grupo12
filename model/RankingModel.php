@@ -10,9 +10,9 @@ class RankingModel
     }
 
     public function getNameAndScoreByPositionOfUsers(){
-        return $this->database->queary('SELECT fullname, score,
-       (SELECT COUNT(*) + 1 FROM usuario AS u2 WHERE u2.Puntaje_max > u1.Puntaje_max) AS Posicion 
-        FROM usuario as u1 
+        return $this->database->query('SELECT fullname, score, username,
+       (SELECT COUNT(*) + 1 FROM user AS u2 WHERE u2.score > u1.score) AS Posicion 
+        FROM user as u1 
         ORDER BY score DESC;');
     }
 
