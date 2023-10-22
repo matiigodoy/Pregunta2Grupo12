@@ -22,7 +22,7 @@ class RegisterService
 
         if ($formData['foto_perfil']['name']) {
             $photo = basename($formData['foto_perfil']['name']);
-            $imagePath = "./public/images/" . $photo;
+            $imagePath = "./public/" . $photo;
             move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $imagePath);
         }
         if (!$this->validatePassword($pass, $passValidate)) {
