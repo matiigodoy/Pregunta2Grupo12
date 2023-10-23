@@ -36,8 +36,8 @@ class Configuration {
 
 
     public function getPartidaController() {
-        return new PartidaController( $this->getPartidaModel(), $this->getPartidaService(),$this->getRenderer());
-
+        return new PartidaController($this->getPartidaModel(), $this->getPartidaService(), $this->getRenderer());
+    }
     public function getRankingController() {
         return new RankingController( $this->getRankingModel(),$this->getRenderer());
     }
@@ -65,39 +65,34 @@ class Configuration {
             "getRegisterController",
             "view");
     }
-    public function getRegisterService(){
+    public function getRegisterService() {
         return new RegisterService(
             $this->getRegisterModel()
         );
     }
-    public function getRegisterModel()
-    {
+    public function getRegisterModel() {
         return new RegisterModel($this->getDatabase());
     }
-    public function getLoginService(){
+    public function getLoginService() {
         return new LoginService(
             $this->getLoginModel()
         );
     }
-    public function getLoginModel()
-    {
+    public function getLoginModel() {
         return new LoginModel($this->getDatabase());
     }
 
-    public function getPartidaService(){
+    public function getPartidaService() {
         return new PartidaService(
             $this->getPartidaModel()
         );
     }
       
-    public function getPartidaModel()
-    {
+    public function getPartidaModel() {
         return new PartidaModel($this->getDatabase());
     }
 
-    public function getRankingModel()
-    {
+    public function getRankingModel() {
         return new RankingModel($this->getDatabase());
     }
-
 }
