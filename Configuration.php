@@ -3,12 +3,15 @@ include_once('helpers/MySqlDatabase.php');
 include_once("helpers/MustacheRender.php");
 include_once('helpers/Router.php');
 include_once('helpers/Logger.php');
+include_once('helpers/perfilService.php');
 
 include_once('controller/RegisterController.php');
 include_once('controller/LoginController.php');
+include_once('controller/perfilController.php');
 
 include_once('model/RegisterModel.php');
 include_once('model/LoginModel.php');
+include_once('model/perfilModel.php');
 
 include_once('helpers/RegisterService.php');
 include_once('helpers/LoginService.php');
@@ -50,7 +53,8 @@ class Configuration {
         return new Router(
             $this,
             "getRegisterController",
-            "view");
+            "view", 
+        "perfil");
     }
     public function getRegisterService(){
         return new RegisterService(
@@ -70,4 +74,19 @@ class Configuration {
     {
         return new LoginModel($this->getDatabase());
     }
+
+   
+    public function getPerfilController() {
+        return new perfilController($this->getPerfilService(), $this->getRenderer());
+    }
+
+    public function getPerfilService() {
+        return new perfilService($this->getPerfilModel());
+    }
+
+    public function getPerfilModel() {
+        return new perfilModel($this->getDatabase());
+    }
+
+
 }

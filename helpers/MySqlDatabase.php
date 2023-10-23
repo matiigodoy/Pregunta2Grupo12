@@ -31,7 +31,11 @@ class MySqlDatabase {
     }
 
     public function prepare($sql)
-    {
-        return mysqli_prepare($this->connection, $sql);
+{
+    $stmt = mysqli_prepare($this->connection, $sql);
+    if (!$stmt) {
+        die('Error en la preparación de la consulta: ' . mysqli_error($this->connection));
     }
+    return $stmt;
+}
 }
