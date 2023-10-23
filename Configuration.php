@@ -18,6 +18,7 @@ include_once('model/PerfilModel.php');
 
 include_once('helpers/RegisterService.php');
 include_once('helpers/LoginService.php');
+include_once('helpers/PartidaService.php');
 include_once('helpers/PerfilService.php');
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
@@ -100,14 +101,14 @@ class Configuration {
     }
    
     public function getPerfilController() {
-        return new perfilController($this->getPerfilService(), $this->getRenderer());
+        return new PerfilController($this->getPerfilService(), $this->getRenderer());
     }
 
     public function getPerfilService() {
-        return new perfilService($this->getPerfilModel());
+        return new PerfilService($this->getPerfilModel());
     }
 
     public function getPerfilModel() {
-        return new perfilModel($this->getDatabase());
+        return new PerfilModel($this->getDatabase());
     }
 }
