@@ -7,10 +7,12 @@ include_once('helpers/Logger.php');
 include_once('controller/RegisterController.php');
 include_once('controller/LoginController.php');
 include_once('controller/PartidaController.php');
+include_once('controller/RankingController.php');
 
 include_once('model/RegisterModel.php');
 include_once('model/LoginModel.php');
 include_once('model/PartidaModel.php');
+include_once('model/RankingModel.php');
 
 include_once('helpers/RegisterService.php');
 include_once('helpers/LoginService.php');
@@ -32,8 +34,12 @@ class Configuration {
         return new LoginController( $this->getLoginModel(), $this->getLoginService(),$this->getRenderer());
     }
 
+
     public function getPartidaController() {
         return new PartidaController( $this->getPartidaModel(), $this->getPartidaService(),$this->getRenderer());
+
+    public function getRankingController() {
+        return new RankingController( $this->getRankingModel(),$this->getRenderer());
     }
 
     private function getArrayConfig() {
@@ -77,13 +83,21 @@ class Configuration {
     {
         return new LoginModel($this->getDatabase());
     }
+
     public function getPartidaService(){
         return new PartidaService(
             $this->getPartidaModel()
         );
     }
+      
     public function getPartidaModel()
     {
         return new PartidaModel($this->getDatabase());
     }
+
+    public function getRankingModel()
+    {
+        return new RankingModel($this->getDatabase());
+    }
+
 }

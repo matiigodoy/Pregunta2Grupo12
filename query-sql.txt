@@ -31,14 +31,22 @@ CREATE TABLE user (
 	email VARCHAR(255) NOT NULL UNIQUE,
 	username VARCHAR(30) NOT NULL,
 	password VARCHAR(30) NOT NULL,
+	score INT(6) NOT NULL,
 	register_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	is_active BOOLEAN NOT NULL DEFAULT TRUE,
 	FOREIGN KEY(idCountry) REFERENCES country(id),
 	FOREIGN KEY(idCity) REFERENCES city(id)
 	);
 
-INSERT INTO user (fullname,birth_date,gender,idCountry,idCity,profile_picture,email,username,password)
-VALUES ('Pregun Tados','2013-10-26','Femenino',1,1,NULL,'pregunta2@etermax.com','admin','1234');
+INSERT INTO user (fullname,birth_date,gender,idCountry,idCity,profile_picture,email,username,password,score)
+VALUES ('Pregun Tados','2013-10-26','Femenino',1,1,NULL,'pregunta2@acidmax.com','admin','1234',0),
+('Matii Godoy','1993-09-07','Masculino',1,1,NULL,'user1@acidmax.com','user1','1234',2222),
+('Joaco 853','2001-06-03','Masculino',1,1,NULL,'user2@acidmax.com','user2','1234',1853),
+('Anita Progra','1994-01-01','Femenino',1,2,NULL,'user3@acidmax.com','user3','1234',1400),
+('Cele Ste','1993-01-01','Femenino',1,2,NULL,'user4@acidmax.com','user4','1234',1200),
+('Mativi Llalba','1990-01-01','Masculino',1,1,NULL,'user5@acidmax.com','user5','1234',800),
+('Roberto Carlos','1960-01-01','Masculino',1,1,NULL,'user6@acidmax.com','user6','1234',6),
+('Nicky Starfield','2000-01-01','No especificar',1,1,NULL,'user7@acidmax.com','user7','1234',20);
 
 CREATE TABLE category (
 	id INT(4) NOT NULL PRIMARY KEY,
