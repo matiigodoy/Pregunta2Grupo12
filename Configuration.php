@@ -53,8 +53,7 @@ class Configuration {
         return new Router(
             $this,
             "getRegisterController",
-            "view", 
-        "perfil");
+            "view");
     }
     public function getRegisterService() {
         return new RegisterService(
@@ -88,5 +87,5 @@ class Configuration {
         return new perfilModel($this->getDatabase());
     }
 
-    
+
 }
