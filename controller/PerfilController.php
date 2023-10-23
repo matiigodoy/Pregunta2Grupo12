@@ -8,7 +8,10 @@ class PerfilController {
         $this->renderer = $renderer;
     }
 
-    public function view($usuarioID) {
+    public function view() {
+        if (isset($_GET['id'])) {
+            $usuarioID = $_GET['id'];
+        }
         // aca tomo datos del perfil del usuario desde el servicio
         $perfilData = $this->perfilService->obtenerPerfil($usuarioID);
     

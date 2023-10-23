@@ -3,15 +3,15 @@ include_once('helpers/MySqlDatabase.php');
 include_once("helpers/MustacheRender.php");
 include_once('helpers/Router.php');
 include_once('helpers/Logger.php');
-include_once('helpers/perfilService.php');
+include_once('helpers/PerfilService.php');
 
 include_once('controller/RegisterController.php');
 include_once('controller/LoginController.php');
-include_once('controller/perfilController.php');
+include_once('controller/PerfilController.php');
 
 include_once('model/RegisterModel.php');
 include_once('model/LoginModel.php');
-include_once('model/perfilModel.php');
+include_once('model/PerfilModel.php');
 
 include_once('helpers/RegisterService.php');
 include_once('helpers/LoginService.php');
