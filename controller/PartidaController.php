@@ -20,15 +20,13 @@ class PartidaController {
 
     public function newGame()
     {
-        $question = $this->partidaService->getRandomQuestion();
-        $this->renderNewGame($question);
+        $this->renderer->render("game");
     }
 
-    private function renderNewGame($question)
+    public function getQuestion()
     {
-
-        //$data['question'] = $question[0]['description'];
-        $data['question'] = $question[0];
-        $this->renderer->render("game", $data);
+        $question = $this->partidaService->getRandomQuestion();
+        echo json_encode($question[0]);
     }
+
 }
