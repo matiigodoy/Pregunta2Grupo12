@@ -1,0 +1,59 @@
+<main class="py-5">
+    <div class="content container px-lg-5 p-4 bg-light rounded-3">
+
+        <form action="/EditarPregunta/editarpregunta" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                <div class="form-group">
+                    {{#pregunta}}
+                        <input type="hidden" name="id" class="form-control" value="{{id}}">
+                        <label>Pregunta</label>
+                        <input required name="description" class="form-control" value="{{description}}">
+                    </div>
+                        <div class="form-group">
+                            <label>Respuesta A</label>
+                            <input required name="option_1" class="form-control" value="{{option_1}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Respuesta B</label>
+                            <input required name="option_2" class="form-control" value="{{option_2}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Respuesta C</label>
+                            <input required name="option_3" class="form-control" value="{{option_3}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Respuesta D</label>
+                            <input required name="option_4" class="form-control" value="{{option_4}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select name="idcategoria" class="form-control" required>
+                                <option value="{{id_categoria}}" selected>No modificar categoria</option>
+                                <option value="categoria_1">categoria 1</option>
+                                <option value="categoria_2">categoria 2</option>
+                                <option value="categoria_3">categoria 3</option>
+                                <option value="categoria_4">categoria 4</option>
+                                <option value="categoria_5">categoria 5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Respuesta correcta</label>
+                            <select name="respuestaCorrecta" class="form-control" required>
+                                <option value="{{respuestaCorrecta}}" selected>{{respuestaCorrecta}}</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                    <div class="d-flex justify-content-center">
+                        <br>
+                        <button type="submit" class="btn btn-primary m-3">Guardar cambios</button>
+                    {{/pregunta}}
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
