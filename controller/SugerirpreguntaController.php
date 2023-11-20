@@ -2,7 +2,7 @@
 
 class SugerirpreguntaController{
 
-
+    //Joaquin
 
     private $PreguntaModel;
     private $renderer;

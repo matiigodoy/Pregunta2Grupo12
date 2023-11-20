@@ -2,6 +2,7 @@
 
 class PreguntaModel
 {
+    //Joaquin
 
     private $database;
     public function __construct($database)

@@ -2,6 +2,8 @@
 
 class EditarPreguntaController
 {
+    //Joaquin
+
     private $PreguntaModel;
     private $renderer;
 

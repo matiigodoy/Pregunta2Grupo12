@@ -43,7 +43,9 @@ class Configuration {
     public function getRankingController() {
         return new RankingController( $this->getRankingModel(),$this->getRenderer());
     }
-
+    public function getGraficadorController() {
+        return new GraficadorController( $this->getGraficadorModel(),$this->getRenderer());
+    }
     private function getArrayConfig() {
         return parse_ini_file($this->configFile);
     }
@@ -110,5 +112,10 @@ class Configuration {
 
     public function getPerfilModel() {
         return new PerfilModel($this->getDatabase());
+    }
+
+    private function getGraficadorModel()
+    {
+        return new GraficadorModel($this->getDatabase());
     }
 }
