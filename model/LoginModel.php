@@ -18,6 +18,19 @@ class LoginModel {
 
         return $count > 0;
     }
+
+    public function getUserHash($hash){
+        $result= $this->database->uniqueQuery("SELECT Hash FROM user WHERE Hash = '$hash' ");
+        return $result['Hash'];
+    }
+
+    public function getUserByNameAndPass($user, $pass){
+        return $this->database->query("SELECT * FROM user WHERE username = '$user' and password_hash = '$pass'");
+    }
+
+    public function setUserRolHash($hash){
+        $this->database->update("UPDATE user SET Id_rol = 3 WHERE Hash = '$hash'");
+    }
 }
 
 ?>

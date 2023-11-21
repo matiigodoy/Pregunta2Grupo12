@@ -1,5 +1,12 @@
 <?php
 
+require 'third-party/PHPMailer/src/Exception.php';
+require 'third-party/PHPMailer/src/PHPMailer.php';
+require 'third-party/PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class RegisterModel
 {
     private $database;
@@ -9,14 +16,54 @@ class RegisterModel
         $this->database = $database;
     }
 
+    public function getHash($email){
+        $result = $this->database->uniqueQuery("SELECT Hash FROM user WHERE email = '$email'");
+        return $result['Hash'];
+    }
+
+    public function validateEmail($email, $hash, $nameComplete){
+        $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.office365.com';
+            $mail->AuthType = 'PLAIN';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'mattii2010@hotmail.com';
+            $mail->Password = 'kriegsmarine';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->Timeout = 30;
+
+            $mail->setFrom('mattii2010@hotmail.com', "Pregunta2");
+            $mail->addAddress($email, $nameComplete);
+            $mail->Subject = 'Confirma tu cuenta... y empeza a responder!';
+
+            $mail->isHTML(true);
+            $mail->Body = '<h1> Tu URL para el activar tu correo </h1>
+            Haz click <a href="' . $_SERVER['SERVER_NAME'] . '/Login/validateEmail?hash=' . 
+                $hash . '">en este link</a> para validar tu email';
+            //$mail->Body = 'Hola ' . $nameComplete . ', gracias por registrarte.';
+
+            $mail->AltBody = 'Si no puedes ver este mensaje, por favor,
+            habilita el soporte para HTML en tu cliente de correo.';
+            $mail->send();
+        } catch (Exception $e) {
+            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+        }
+    }
+
     public function saveUser($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo)
     {
         $ret = false;
+        $hashPass = md5($pass);
+        $token = openssl_random_pseudo_bytes(16);
+        $hashValidate = md5($token);
 
         if ($this->validateUser($mail, $nameUser)) {
-            $query = "INSERT INTO user (fullname, birth_date, gender, idCountry, idCity, email, username, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO user (fullname, birth_date, gender, idCountry, idCity, email, username, password, profile_picture, Hash, password_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->database->prepare($query);
-            $stmt->bind_param("sssiissss", $nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo);
+            $stmt->bind_param("sssidssssss", $nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo, $hashValidate, $hashPass);
             $stmt->execute();
             if ($stmt->affected_rows > 0) {
                 $ret = true;

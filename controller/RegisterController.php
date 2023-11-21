@@ -38,6 +38,7 @@ class RegisterController {
             $data["message"] = "Por favor, completa todos los campos. Solo es opcional la imagen de perfil.";
             $data['showMessage'] = true;
             $this->renderer->render("register", $data);
+            Logger::info;
         }
     }
 
@@ -53,5 +54,6 @@ class RegisterController {
         $data['showMessage'] = true;
         $data['mapa'] = true;
         $this->renderer->render("register", $data);
+        Logger::info('Ejecutando query: ' . $message);
     }
 }

@@ -3,18 +3,21 @@ include_once('helpers/MySqlDatabase.php');
 include_once("helpers/MustacheRender.php");
 include_once('helpers/Router.php');
 include_once('helpers/Logger.php');
+include_once('helpers/SessionControl.php');
 
 include_once('controller/RegisterController.php');
 include_once('controller/LoginController.php');
 include_once('controller/PartidaController.php');
 include_once('controller/RankingController.php');
 include_once('controller/PerfilController.php');
+include_once('controller/LobbyController.php');
 
 include_once('model/RegisterModel.php');
 include_once('model/LoginModel.php');
 include_once('model/PartidaModel.php');
 include_once('model/RankingModel.php');
 include_once('model/PerfilModel.php');
+include_once("model/LobbyModel.php");
 
 include_once('helpers/RegisterService.php');
 include_once('helpers/LoginService.php');
@@ -30,11 +33,14 @@ class Configuration {
     public function __construct() {
     }
 
+    public function getSessionControl(){
+        return new SessionControl();
+    }
     public function getRegisterController() {
         return new RegisterController( $this->getRegisterModel(), $this->getRegisterService(),$this->getRenderer());
     }
     public function getLoginController() {
-        return new LoginController( $this->getLoginModel(), $this->getLoginService(),$this->getRenderer());
+        return new LoginController( $this->getLoginModel(), $this->getLoginService(),$this->getRenderer(),$this->getSessionControl());
     }
 
     public function getPartidaController() {
@@ -42,6 +48,13 @@ class Configuration {
     }
     public function getRankingController() {
         return new RankingController( $this->getRankingModel(),$this->getRenderer());
+    }
+    public function getLobbyController()
+    {
+        return new LobbyController(
+            new LobbyModel($this->getDatabase()),
+            $this->getRenderer(),
+            $this->getSessionControl());
     }
 
     private function getArrayConfig() {

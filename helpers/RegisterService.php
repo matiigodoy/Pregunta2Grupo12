@@ -40,6 +40,8 @@ class RegisterService
     {
         {
             if ($this->model->saveUser($nameComplete, $birth, $gender, $country, $city, $mail, $nameUser, $pass, $photo)) {
+                $hash = $this->model->getHash($mail);
+                $this->model->validateEmail($mail, $hash, $nameComplete);
                 return true;
             }
         }

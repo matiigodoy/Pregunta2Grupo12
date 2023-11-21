@@ -28,9 +28,12 @@ CREATE TABLE user (
 	idCountry INT(4) NOT NULL,
 	idCity INT(6) NOT NULL,
 	profile_picture VARCHAR(30) DEFAULT NULL,
+	Id_rol INT(10) NOT NULL,
+	Hash VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL UNIQUE,
 	username VARCHAR(30) NOT NULL,
 	password VARCHAR(30) NOT NULL,
+	password_hash VARCHAR(255) NOT NULL,
 	score INT(6) NOT NULL,
 	register_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	is_active BOOLEAN NOT NULL DEFAULT TRUE,
@@ -38,7 +41,7 @@ CREATE TABLE user (
 	FOREIGN KEY(idCity) REFERENCES city(id)
 	);
 
-INSERT INTO user (fullname,birth_date,gender,idCountry,idCity,profile_picture,email,username,password,score)
+INSERT INTO user (fullname,birth_date,gender,idCountry,idCity,profile_picture,Hash,email,username,password,password_hash,score)
 VALUES ('Pregun Tados','2013-10-26','Femenino',1,1,NULL,'pregunta2@acidmax.com','admin','1234',0),
 ('Matii Godoy','1993-09-07','Masculino',1,1,NULL,'user1@acidmax.com','user1','1234',2222),
 ('Joaco 853','2001-06-03','Masculino',1,1,NULL,'user2@acidmax.com','user2','1234',1853),
@@ -101,3 +104,14 @@ VALUES
 ('Se denomina Scripting del lado del cliente, o programación Front-end o Client Side Scripting a :',2,'ACTIVA','Porciones de codigo ejecutable que se envian al navegador del cliente para que este los ejecute','Porciones de codigo ejecutable que el cliente envia para quese ejecuten en el servidor','La parte del modelo de negocios que se ejecuta en el servidor','Ninguna de las anteriores',1),
 ('Se denomina Scripting del lado del servidor, o programación Back-end o Server Side Scripting a :',2,'ACTIVA','Porciones de codigo ejecutable que se envian al navegador del cliente para que este los ejecute','Porciones de código ejecutable que se ejecutan en el servidor ante una petición del cliente','La parte del modelo de negocios que se ejecuta en el cliente','Ninguna de las anteriores',2),
 ('La petición de un recurso determinado a un sitio Web (imagen, archivo, etc.) se canaliza mediante:',2,'ACTIVA','Una URL','Un DNS','Una API','Ninguna de las anteriores',1);
+
+CREATE TABLE rol (
+  	id INT(11) NOT NULL,
+  	descripcion VARCHAR(30) NOT NULL
+	);
+
+INSERT INTO rol (id, descripcion) VALUES
+	(0, 'No_validado'),
+	(1, 'Administrador'),
+	(2, 'Editor'),
+	(3, 'Jugador');
