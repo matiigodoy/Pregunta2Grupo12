@@ -29,13 +29,16 @@ class RegisterModel
             $mail->Host = 'smtp.office365.com';
             $mail->AuthType = 'PLAIN';
             $mail->SMTPAuth = true;
-            $mail->Username = 'mattii2010@hotmail.com';
-            $mail->Password = 'kriegsmarine';
+            //Correo de remitente (que sea hotmail)
+            $mail->Username = '****@hotmail.com';
+            //Clave del correo
+            $mail->Password = '****';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
             $mail->Timeout = 30;
 
-            $mail->setFrom('mattii2010@hotmail.com', "Pregunta2");
+            //Nuevamente correo de remitente
+            $mail->setFrom('****@hotmail.com', "Pregunta2");
             $mail->addAddress($email, $nameComplete);
             $mail->Subject = 'Confirma tu cuenta... y empeza a responder!';
 
@@ -43,7 +46,6 @@ class RegisterModel
             $mail->Body = '<h1> Tu URL para el activar tu correo </h1>
             Haz click <a href="' . $_SERVER['SERVER_NAME'] . '/Login/validateEmail?hash=' . 
                 $hash . '">en este link</a> para validar tu email';
-            //$mail->Body = 'Hola ' . $nameComplete . ', gracias por registrarte.';
 
             $mail->AltBody = 'Si no puedes ver este mensaje, por favor,
             habilita el soporte para HTML en tu cliente de correo.';
